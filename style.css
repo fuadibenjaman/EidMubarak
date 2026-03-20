@@ -80,6 +80,13 @@ textarea {
   resize: none;
 }
 
+/* Note */
+.note {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-top: 10px;
+}
+
 /* Button */
 .card button,
 button {
@@ -120,8 +127,4 @@ button:hover {
     opacity: 1;
     transform: translateY(0);
   }
-}
-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
