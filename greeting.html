@@ -20,22 +20,19 @@
       Please remember me in your prayers as well. ✨....
     </p>
 
-    <!-- Reply Section -->
     <h3><i><b>Do you have anything to say for me?</b></i> 💌</h3>
     <textarea id="replyBox" placeholder="Write your reply..."></textarea>
     <br><br>
-  <button onclick="sendReply()">Send Reply</button>
-   <p class="note">Please press at least twice..⚠️</p>
+    <button id="sendBtn" onclick="sendReply()">Send Reply</button>
 
   </div>
 
-  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCc-jm_gQFVCkt75vk3PUg1gjwvY3URozo",
+      apiKey: "YOUR_KEY",
       authDomain: "eid-greeting-replies.firebaseapp.com",
       projectId: "eid-greeting-replies",
       storageBucket: "eid-greeting-replies.firebasestorage.app",
@@ -47,12 +44,17 @@
     const db = getFirestore(app);
 
     window.sendReply = async function () {
-      const reply = document.getElementById("replyBox").value;
+      const replyBox = document.getElementById("replyBox");
+      const btn = document.getElementById("sendBtn");
+
+      const reply = replyBox.value.trim();
       if (reply === "") return alert("Write something first!");
 
-      // Get user name from URL
+      btn.disabled = true;
+      btn.innerText = "Sending...";
+
       const params = new URLSearchParams(window.location.search);
-      const name = params.get("name") || "Anonymous";
+      const name = params.get("name") || localStorage.getItem("userName") || "anonymous";
 
       await addDoc(collection(db, "replies"), {
         name: name,
@@ -61,11 +63,13 @@
       });
 
       alert("Reply sent ❤️");
-      document.getElementById("replyBox").value = "";
+      replyBox.value = "";
+
+      btn.disabled = false;
+      btn.innerText = "Send Reply";
     }
   </script>
 
-  <!-- Main JS -->
   <script src="script.js"></script>
 
 </body>
