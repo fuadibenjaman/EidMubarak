@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  overflow-y: auto; /* scroll enabled */
+}
+
+/* Center container */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Card design */
+.card,
+.greeting-card {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 40px 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1.2s ease;
+}
+
+/* Scroll only for greeting page */
+.greeting-card {
+  max-height: 80vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Headings */
+.card h1,
+#greet {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #ffd700;
+}
+
+/* Text */
+.card p,
+.subtitle {
+  margin-bottom: 25px;
+  font-size: 17px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Input + textarea */
+.card input,
+textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  width: 100%;
+  outline: none;
+}
+
+/* Textarea specific */
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Button */
+.card button,
+button {
+  margin-top: 15px;
+  background: #ffd700;
+  color: black;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.card button:hover,
+button:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* Scrollbar styling (optional premium feel 😏) */
+.greeting-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.greeting-card::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 10px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
