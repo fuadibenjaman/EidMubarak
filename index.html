@@ -20,6 +20,8 @@
       <button type="submit">Enter✨</button>
     </form>
 
+    <p id="lockMsg" style="font-size: 14px; opacity: 0.7;"></p>
+
   </div>
 
 </div>
@@ -27,24 +29,25 @@
 <script>
 const form = document.getElementById("nameForm");
 const input = document.getElementById("nameInput");
+const lockMsg = document.getElementById("lockMsg");
 
 let savedName = localStorage.getItem("userName");
 
-// যদি আগে নাম দেওয়া থাকে
+// যদি আগে নাম দেওয়া থাকে → lock
 if(savedName){
     input.value = savedName;
+    input.disabled = true;
+    lockMsg.innerText = "🔒 Name locked for this device";
 }
 
-// form submit
+// submit
 form.addEventListener("submit", function(e){
     let currentName = input.value.trim();
 
     if(savedName){
-        // যদি অন্য নাম দেয় → ignore করে আগেরটাই use করবে
         e.preventDefault();
-        window.location.href = "greeting.html?name=" + savedName;
+        window.location.href = "greeting.html?name=" + encodeURIComponent(savedName);
     } else {
-        // প্রথমবার → save
         localStorage.setItem("userName", currentName);
     }
 });
