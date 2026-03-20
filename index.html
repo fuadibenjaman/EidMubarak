@@ -27,28 +27,35 @@
 </div>
 
 <script>
+// 🔥 Version system (for reset)
+const VERSION = "v2";
+const STORAGE_KEY = "userName_" + VERSION;
+
 const form = document.getElementById("nameForm");
 const input = document.getElementById("nameInput");
 const lockMsg = document.getElementById("lockMsg");
 
-let savedName = localStorage.getItem("userName");
+// 🔒 get saved name
+let savedName = localStorage.getItem(STORAGE_KEY);
 
-// যদি আগে নাম দেওয়া থাকে → lock
+// যদি আগে নাম দেওয়া থাকে → lock করে দাও
 if(savedName){
     input.value = savedName;
     input.disabled = true;
     lockMsg.innerText = "🔒 Name locked for this device";
 }
 
-// submit
+// form submit
 form.addEventListener("submit", function(e){
     let currentName = input.value.trim();
 
     if(savedName){
+        // সবসময় আগের নামেই redirect
         e.preventDefault();
         window.location.href = "greeting.html?name=" + encodeURIComponent(savedName);
     } else {
-        localStorage.setItem("userName", currentName);
+        // প্রথমবার save
+        localStorage.setItem(STORAGE_KEY, currentName);
     }
 });
 </script>
