@@ -121,3 +121,7 @@ button:hover {
     transform: translateY(0);
   }
 }
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
