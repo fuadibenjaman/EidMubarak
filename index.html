@@ -15,14 +15,40 @@
     <h1>🌙 Hellooo.....</h1>
     <p>Enter the name or nickname (eng) I usually call you.</p>
 
-    <form action="greeting.html" method="GET">
-      <input type="text" name="name" placeholder="Your Name..." required>
+    <form id="nameForm" action="greeting.html" method="GET">
+      <input type="text" id="nameInput" name="name" placeholder="Your Name..." required>
       <button type="submit">Enter✨</button>
     </form>
 
   </div>
 
 </div>
+
+<script>
+const form = document.getElementById("nameForm");
+const input = document.getElementById("nameInput");
+
+let savedName = localStorage.getItem("userName");
+
+// যদি আগে নাম দেওয়া থাকে
+if(savedName){
+    input.value = savedName;
+}
+
+// form submit
+form.addEventListener("submit", function(e){
+    let currentName = input.value.trim();
+
+    if(savedName){
+        // যদি অন্য নাম দেয় → ignore করে আগেরটাই use করবে
+        e.preventDefault();
+        window.location.href = "greeting.html?name=" + savedName;
+    } else {
+        // প্রথমবার → save
+        localStorage.setItem("userName", currentName);
+    }
+});
+</script>
 
 </body>
 </html>
