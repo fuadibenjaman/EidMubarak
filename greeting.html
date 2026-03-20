@@ -20,19 +20,23 @@
       Please remember me in your prayers as well. ✨....
     </p>
 
+    <!-- Reply Section -->
     <h3><i><b>Do you have anything to say for me?</b></i> 💌</h3>
-    <textarea id="replyBox" placeholder="Write your reply..."></textarea>
+    <textarea id="replyBox" placeholder="Write your reply..." class="reply-textarea"></textarea>
     <br><br>
-    <button id="sendBtn" onclick="sendReply()">Send Reply</button>
-
+  <button onclick="sendReply()" class="btn">Send Reply</button>
+  <p class="note">Do not press more than twice..⚠️</p>
   </div>
 
+  <!-- Firebase Script -->
   <script type="module">
+    const VERSION = "v2";
+const STORAGE_KEY = "userName_" + VERSION;
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "YOUR_KEY",
+      apiKey: "AIzaSyCc-jm_gQFVCkt75vk3PUg1gjwvY3URozo",
       authDomain: "eid-greeting-replies.firebaseapp.com",
       projectId: "eid-greeting-replies",
       storageBucket: "eid-greeting-replies.firebasestorage.app",
@@ -44,17 +48,12 @@
     const db = getFirestore(app);
 
     window.sendReply = async function () {
-      const replyBox = document.getElementById("replyBox");
-      const btn = document.getElementById("sendBtn");
-
-      const reply = replyBox.value.trim();
+      const reply = document.getElementById("replyBox").value;
       if (reply === "") return alert("Write something first!");
 
-      btn.disabled = true;
-      btn.innerText = "Sending...";
-
+      // Get user name from URL
       const params = new URLSearchParams(window.location.search);
-      const name = params.get("name") || localStorage.getItem("userName") || "anonymous";
+      const name = params.get("name") || localStorage.getItem(STORAGE_KEY) || "anonymous";;
 
       await addDoc(collection(db, "replies"), {
         name: name,
@@ -63,13 +62,11 @@
       });
 
       alert("Reply sent ❤️");
-      replyBox.value = "";
-
-      btn.disabled = false;
-      btn.innerText = "Send Reply";
+      document.getElementById("replyBox").value = "";
     }
   </script>
 
+  <!-- Main JS -->
   <script src="script.js"></script>
 
 </body>
