@@ -13,7 +13,7 @@
 
     <h1 id="greet"></h1>
 
-    <p class="subtitle">
+    <p class="subtitle" id="subtitle">
       ....May this joyous day bring you lots of happiness.
       I pray for your well-being and success.
       May the Almighty accept your deeds and blessings in this holy month.
@@ -21,13 +21,13 @@
     </p>
 
     <!-- Reply Section -->
-    <h3><i><b>Do you have anything to say for me?</b></i> 💌</h3>
-    <textarea id="replyBox" placeholder="Write your reply..." class="reply-textarea"></textarea>
-    <br><br>
+<div id="replySection">
+  <h3><i><b>Do you have anything to say for me?</b></i> 💌</h3>
+  <textarea id="replyBox" placeholder="Write your reply..." class="reply-textarea"></textarea>
+  <br><br>
   <button onclick="sendReply()" class="btn">Send Reply</button>
   <p class="note">Do not press more than twice..⚠️</p>
-  </div>
-
+</div>
   <!-- Firebase Script -->
   <script type="module">
     const VERSION = "v2";
